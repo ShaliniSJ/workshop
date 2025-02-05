@@ -20,7 +20,13 @@ export default function ReactionTimer() {
             setStartTime(Date.now());
         }, randomDelay);
     };
-
+    function catagory(time) {
+        if (time < 200) return "Godlike";
+        else if (time < 300) return "Pro";
+        else if (time < 400) return "Average";
+        else if (time < 500) return "Noob";
+        else return "Snail";
+    }
     const handleClick = () => {
         if (gameState === "waiting") {
             clearTimeout(timeout);
@@ -35,10 +41,10 @@ export default function ReactionTimer() {
 
     return (
         <Container
-            maxWidth="sm"
+            maxWidth="l"
             style={{ textAlign: "center", marginTop: "50px" }}
         >
-            <Typography variant="h4">Reaction Timer Game</Typography>
+            <Typography variant="h2">Reaction Timer Game</Typography>
 
             {gameState === "idle" && (
                 <Button
@@ -80,8 +86,10 @@ export default function ReactionTimer() {
             )}
 
             {gameState === "result" && (
-                <Typography variant="h6" style={{ marginTop: "20px" }}>
-                    Your Reaction Time: <strong>{reactionTime}ms</strong>
+                <Typography variant="h4" style={{ marginTop: "20px" }}>
+                    Reaction Time: <strong>{reactionTime}ms</strong>
+                    <br />
+                    Your <strong>{catagory(reactionTime)}</strong>
                 </Typography>
             )}
         </Container>
